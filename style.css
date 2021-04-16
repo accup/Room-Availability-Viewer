@@ -1,0 +1,54 @@
+body {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+
+	background-color: #080808;
+
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+div#plate {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: 8px;
+	padding: 0;
+
+	border: 2px solid #80C0FF;
+	border-radius: 0.8em;
+
+	background-color: rgba(64, 128, 196, 0.3);
+}
+
+.indent {
+	padding-left: 1em;
+}
+.left {
+	text-align: left;
+}
+.left.indent {
+	padding-left: 1em;
+}
+.right {
+	text-align: right;
+}
+.right.indent {
+	padding-left: 0;
+	padding-right: 1em;
+}
+.line-through {
+	text-decoration: line-through;
+}
+p {
+	text-indent: 1em;
+}

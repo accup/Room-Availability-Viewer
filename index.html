@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="apple-mobile-web-app-capable" content="" />
+		<meta name="apple-touch-icon" content="" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="./overdrive.js"></script>
+		<script src="./DomHash.js"></script>
+		<script src="./DateEx.js"></script>
+		<script src="./parseTimeLine.js"></script>
+		<link rel="stylesheet" href="schedule.css" />
+		<script src="./schedule.js"></script>
+		<link rel="stylesheet" href="calendar.css" />
+		<script src="./calendar.js"></script>
+		
+		<link rel="stylesheet" href="clock.css" />
+		<script src="./clock.js"></script>
+
+		<link rel="stylesheet" href="manual.css" />
+		<script src="./manual.js"></script>
+		<title>Room Availability Viewer</title>
+	</head>
+	<body>
+		<div id="plate">
+			<svg id="clock-frame" viewBox="-20 0 140 55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<defs>
+					<!-- 数字 -->
+					<symbol id="clock-symbol-number" viewBox="-10 -20 30 40">
+						<path d="M0,0 l0,-10 10,0 0,10 0,10 -10,0 0,-10 10,0" />
+					</symbol>
+					<!-- アルファベット -->
+					<symbol id="clock-symbol-alphabet" viewBox="-10 -20 30 40">
+						<path d="M0,0 l0,-10 10,0 0,10 0,10 -10,0 0,-10 10,0  0,-10 -5,0  0,10 0,10  -5,0 0,-15  10,0  0,5 -10,0 0,5  10,0"/>
+					</symbol>
+				</defs>
+
+				<!-- 年 -->
+				<use id="clock-year-1" xlink:href="#clock-symbol-number" class="clock-number" x="-11" y="0" width="15" height="20"/>
+				<use id="clock-year-2" xlink:href="#clock-symbol-number" class="clock-number" x="-4" y="0" width="15" height="20"/>
+				<use id="clock-year-3" xlink:href="#clock-symbol-number" class="clock-number" x="3" y="0" width="15" height="20"/>
+				<use id="clock-year-4" xlink:href="#clock-symbol-number" class="clock-number" x="10" y="0" width="15" height="20"/>
+				<!-- / -->
+				<path class="clock-slash" d="M23,15 l5,-10" />
+				<!-- 月 -->
+				<use id="clock-month-1" xlink:href="#clock-symbol-number" class="clock-number" x="28" y="0" width="15" height="20"/>
+				<use id="clock-month-2" xlink:href="#clock-symbol-number" class="clock-number" x="35" y="0" width="15" height="20"/>
+				<!-- / -->
+				<path class="clock-slash" d="M48,15 l5,-10" />
+				<!-- 日 -->
+				<use id="clock-date-1" xlink:href="#clock-symbol-number" class="clock-number" x="51" y="0" width="15" height="20"/>
+				<use id="clock-date-2" xlink:href="#clock-symbol-number" class="clock-number" x="58" y="0" width="15" height="20"/>
+				<!-- / -->
+				<path class="clock-slash" d="M71,15 l5,-10" />
+				<!-- 曜日 -->
+				<use id="clock-day-1"
+				xlink:href="#clock-symbol-alphabet"
+				class="clock-alphabet" x="74" y="0" width="15" height="20" />
+				<use id="clock-day-2"
+				xlink:href="#clock-symbol-alphabet"
+				class="clock-alphabet" x="81" y="0" width="15" height="20" />
+				<use id="clock-day-3"
+				xlink:href="#clock-symbol-alphabet"
+				class="clock-alphabet" x="88" y="0" width="15" height="20" />
+
+				<!-- 祝日 -->
+				<text id="clock-holiday-name" text-anchor="end" alignment-baseline="hanging" x="105" y="17" font-size="7"></text>
+
+				<!-- 時 -->
+				<use id="clock-hour-1"
+				xlink:href="#clock-symbol-number"
+				class="clock-number" x="-8" y="20" width="30" height="40" />
+				<use id="clock-hour-2"
+				xlink:href="#clock-symbol-number"
+				class="clock-number" x="6" y="20" width="30" height="40" />
+				<!-- : -->
+				<path class="clock-colon" d="M32,35 l0,0 m0,10 l0,0" />
+				<!-- 分 -->
+				<use id="clock-minute-1"
+				xlink:href="#clock-symbol-number"
+				class="clock-number" x="28" y="20" width="30" height="40" />
+				<use id="clock-minute-2"
+				xlink:href="#clock-symbol-number"
+				class="clock-number" x="42" y="20" width="30" height="40" />
+				<!-- : -->
+				<path class="clock-colon" d="M68,35 l0,0 m0,10 l0,0" />
+				<!-- 秒 -->
+				<use id="clock-second-1"
+				xlink:href="#clock-symbol-number"
+				class="clock-number" x="64" y="20" width="30" height="40" />
+				<use id="clock-second-2"
+				xlink:href="#clock-symbol-number"
+				class="clock-number" x="78" y="20" width="30" height="40" />
+			</svg>
+			<div id="schedule-frame"></div>
+			<div id="manual">
+				<svg id="manual-open-icon" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path d="M3,2 L7,2 L7,5 L5,5 L5,6.5 M5,8 L5,8.5" />
+				</svg>
+				<div id="manual-contents">
+					<svg id="manual-close" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+						<path id="manual-close-corner" d="M2,8 L2,2 L8,2 M22,2 L28,2 L28,8 M28,22 L28,28 L22,28 M8,28 L2,28 L2,22" />
+						<path d="M10,10 L20,20 M10,20 L20,10" />
+					</svg>
+					<hr />
+					<div>Room Availability Viewer</div>
+					<div class="left indent">取扱説明書</div>
+					<div class="right indent">2021/04/16</div>
+					<hr />
+					<div>■１．使い方</div>
+					<p>
+						そのままメイン画面を眺めてもらえばおおよそ使いこなせていると思います。
+					</p>
+					<ul style="padding-left: 2em;">
+						<li>メイン画面上段 ... ちょっと近代ちっくな時計です。</li>
+						<li>メイン画面下段 ... 今現在の開室状況を表示する部分です。空席状況ではないのでそこは自分の目でお確かめください。各部屋ごとに、左が現在、右がこのあとの予定を表しています。</li>
+						<li>右下のボタン ... この説明書きを表示するボタンです。閉じるときは一番上の×ボタンを押してください。</li>
+					</ul>
+					<p>
+						また、下段の表示を押すと、該当する部屋のスケジュールカレンダーを表示します。わかりやすいかというとそうでもないですが使ってみてください。
+					</p>
+					<div>■２．その他</div>
+					<div class="indent">バージョン : 2.1.0</div>
+					<div class="indent">更新日 : 2021/04/16</div>
+					<div class="indent">作成者 : Accup</div>
+					<div class="indent">スケジュール : <span class="timeline-version"></span> 時点</div>
+					<div class="indent">対応ブラウザ : （Edge | FireFox | Chrome | Safari | Opera | iOS Safari | Chrome for Android）の最新版（未テスト）</div>
+					<br />
+				</div>
+				<div id="manual-open"></div>
+			</div>
+		</div>
+
+		<div id="calendar">
+			<div id="calendar-title" class="calendar-left-right">
+				<svg class="calendar-left" viewBox="0 0 10 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path d="M1,10 L9,2 L9,18 Z" />	
+				</svg>
+				<div class="calendar-value"></div>
+				<svg class="calendar-right" viewBox="0 0 10 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path d="M9,10 L1,2 L1,18 Z" />	
+				</svg>
+			</div>
+			<div id="calendar-year" class="calendar-left-right">
+				<svg class="calendar-left" viewBox="0 0 10 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path d="M1,10 L9,2 L9,18 Z" />	
+				</svg>
+				<div class="calendar-value"></div>
+				<svg class="calendar-right" viewBox="0 0 10 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path d="M9,10 L1,2 L1,18 Z" />	
+				</svg>
+			</div>
+			<div id="calendar-month" class="calendar-left-right">
+				<svg class="calendar-left" viewBox="0 0 10 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path d="M1,10 L9,2 L9,18 Z" />	
+				</svg>
+				<div class="calendar-value"></div>
+				<svg class="calendar-right" viewBox="0 0 10 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<path d="M9,10 L1,2 L1,18 Z" />	
+				</svg>
+			</div>
+			<svg id="calendar-close" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<path id="calendar-close-corner" d="M2,8 L2,2 L8,2 M22,2 L28,2 L28,8 M28,22 L28,28 L22,28 M8,28 L2,28 L2,22" />
+				<path d="M10,10 L20,20 M10,20 L20,10" />
+			</svg>
+			<div id="calendar-legend">
+				<div class="calendar-legend-opened">利用可</div>
+				<div class="calendar-legend-used">使用中</div>
+				<div class="calendar-legend-closed">閉室</div>
+			</div>
+			<div id="calendar-frame">
+				<div id="calendar-frame-time-scale"></div>
+				<div id="calendar-list"></div>
+				<div id="calendar-frame-date-scale"></div>
+			</div>
+		</div>
+	</body>
+</html>

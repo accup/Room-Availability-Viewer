@@ -1,0 +1,366 @@
+@charset "UTF-8";
+
+div#calendar {
+	position: absolute;
+	left: 0;
+	top: 100%;
+	right: 0;
+	bottom: 0;
+
+	overflow: hidden;
+
+	z-index: 1000;
+
+	background-color: rgba(0, 0, 0, 0.9);
+
+	color: #F8F8F8;
+	font-family: '游ゴシック', 'ヒラギノ角ゴ Pro W6', 'メイリオ', 'ＭＳ Ｐゴシック';
+
+	transition: top .5s;
+
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+div#calendar.dom-hash-target {
+	top: 0;
+}
+
+/* div#calendar > */
+div#calendar-title {
+	position: absolute;
+	left: 8px;
+	top: 0;
+	margin: 8px;
+	padding: 4px;
+
+	width: 170px;
+	height: 26px;
+	
+	font-size: 22px;
+	font-weight: 200;
+	line-height: 26px;
+}
+/* div#calendar > */
+div#calendar-month {
+	position: absolute;
+	left: 8px;
+	top: 70px;
+	margin: 8px;
+	padding: 4px;
+
+	width: 170px;
+	height: 26px;
+	
+	font-size: 22px;
+	font-weight: 200;
+	line-height: 26px;
+}
+div#calendar-year {
+	position: absolute;
+	left: 12px;
+	top: 48px;
+	margin: 8px;
+	padding: 4px;
+
+	width: 130px;
+	height: 20px;
+
+	font-size: 16px;
+	font-weight: 200;
+	line-height: 26px;
+}
+div.calendar-left-right {
+	display: flex;
+	flex-direction: row;
+}
+
+/* div.calendar-left-right */
+svg.calendar-left,
+svg.calendar-right {
+	flex: 0 0 auto;
+	height: 100%;
+
+	fill: #80FFC0;
+	stroke: none;
+
+	transform-origin: center center;
+}
+svg.calendar-left:hover,
+svg.calendar-right:hover {
+	fill: #20FF20;
+	transform: scale(1.2);
+}
+div.calendar-value {
+	flex: 1 0 auto;
+	height: 100%;
+	
+	text-align: center;
+}
+
+/* div#calendar > */
+svg#calendar-close {
+	display: block;
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 48px;
+	height: 48px;
+
+	margin: 8px;
+
+	fill: #C0FFC0;
+	fill-opacity: 0.0;
+	stroke: #80FFC0;
+	stroke-width: 1;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+@keyframes calendar-close-hover-anim {
+	0% {
+		transform: scale(1.0)
+	}
+	100% {
+		transform: scale(0.9)
+	}
+}
+svg#calendar-close:hover > path#calendar-close-corner {
+	transform-origin: center center;
+	animation: calendar-close-hover-anim 0.3s ease 0s infinite alternate backwards;
+}
+
+/* div#calendar > */
+div#calendar-frame {
+	position: absolute;
+	left: 0;
+	top: 100px;
+	bottom: 0;
+	right: 0;
+	margin: 16px;
+
+	overflow: hidden;
+
+	border: 2px solid #80FFC0;
+	border-radius: 0.4em;
+}
+
+div#calendar-frame::after {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 56px;
+	height: 20px;
+
+	background-color: rgba(64, 196, 128, 0.8);
+
+	content: "";
+}
+
+/* div#calendar-frame > */
+div#calendar-frame-time-scale {
+	display: flex;
+	flex-direction: row;
+
+	position: absolute;
+	left: 56px;
+	top: 0;
+	right: 0;
+	height: 100%;
+
+	overflow: hidden;
+}
+div#calendar-frame-time-scale::after {
+	flex: 0 0 auto;
+
+	display: block;
+	width: 100px;
+	content: "";
+}
+/* div#calendar-frame-time-scale > */
+div.calendar-frame-time-num {
+	flex: 0 0 auto;
+
+	box-sizing: border-box;
+	border-right: 1px solid #808080;
+
+	height: 100%;
+	text-align: center;
+
+	font-size: 12px;
+
+	background-color: #F8F8F8;
+	color: #080808;
+}
+
+/* div#calendar-frame > */
+div#calendar-frame-date-scale {
+	position: absolute;
+	left: 0;
+	top: 20px;
+	width: 56px;
+	bottom: 0;
+	
+	background-color: rgba(64, 196, 128, 0.8);	
+
+	font-size: 12px;
+	white-space: nowrap;
+	overflow: visible;
+}
+div#calendar-frame-date-scale::after {
+	display: block;
+	height: 100px;
+	content: "";
+}
+/* div#calendar-frame-date-scale > */
+div.calendar-frame-date-item {
+	width: 56px;
+	height: 20px;
+	line-height: 20px;
+
+	margin-bottom: 1px;
+
+	color: #080808;
+}
+div.calendar-frame-date-item > span.calendar-frame-date-item-num,
+div.calendar-frame-date-item > span.calendar-frame-date-item-day {
+	display: inline-block;
+	width: 28px;
+
+	text-align: center;
+
+	background-color: #F8F8F8;
+	color: #080808;
+}
+div.calendar-frame-date-item > span.calendar-frame-date-item-day::before {
+	display: inline;
+	content: "(";
+	color: #080808;
+}
+div.calendar-frame-date-item > span.calendar-frame-date-item-day::after {
+	display: inline;
+	content: ")";
+	color: #080808;
+}
+div.calendar-frame-date-item > span.calendar-frame-date-item-name {
+	display: inline-block;
+
+	padding: 0 4px;
+	text-align: center;
+
+	border-radius: 4px;
+	background-color: rgba(255, 255, 255, 0.3);
+
+	color: #D00040;
+	font-weight: 700;
+}
+/* div#calendar-frame-date > */
+div#calendar-list {
+	position: absolute;
+	left: 56px;
+	top: 20px;
+	right: 0;
+	bottom: 0;
+
+	overflow: scroll;
+
+	font-size: 12px;
+}
+div#calendar-list::-webkit-scrollbar {
+	display: none;
+}
+
+/* div#calendar-list > */
+div.calendar-date {
+	display: flex;
+	flex-direction: row;
+
+	height: 20px;
+
+	margin-bottom: 1px;
+
+	background-color: rgba(0, 255, 6, 0.18);
+}
+
+/* div.calendar-date > */
+div.calendar-time {
+	flex-grow: 0;
+	flex-shrink: 0;
+	
+	height: 20px;
+	line-height: 20px;
+
+	text-align: center;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	background-color: rgb(133, 255, 56);
+	color: #008000;
+}
+div.calendar-time.calendar-closed-time {
+	background-color: rgb(135, 135, 135);
+	color: #F8F8F8;
+}
+div.calendar-time.calendar-used-time {
+	background-color: rgb(255, 117, 40);
+	color: #F8F8F8;
+}
+/* div.calendar-date > */
+div.calendar-blank-time {
+	flex-grow: 0;
+	flex-shrink: 0;
+	
+	height: 20px;
+	line-height: 20px;
+	opacity: 0.0;
+	
+	text-align: center;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+/* div#calendar > */
+div#calendar-legend {
+	position: absolute;
+	top: 52px;
+	right: 24px;
+	margin: 8px;
+
+	font-size: 12px;
+}
+/* div#calendar-regend > */
+div.calendar-legend-opened,
+div.calendar-legend-closed,
+div.calendar-legend-used {
+	margin: 4px;
+	height: 12px;
+	line-height: 12px;
+}
+div.calendar-legend-opened::before,
+div.calendar-legend-closed::before,
+div.calendar-legend-used::before {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	box-sizing: border-box;
+	border: 1px solid #FFFFFF;
+	margin-right: 4px;
+	
+	content: "";
+}
+div.calendar-legend-opened::before {
+	background-color: rgb(133, 255, 56);
+}
+div.calendar-legend-closed::before {
+	background-color: rgb(135, 135, 135);
+}
+div.calendar-legend-used::before {
+	background-color: rgb(255, 117, 40);
+}

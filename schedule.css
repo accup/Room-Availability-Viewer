@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+div#schedule-frame {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+
+	position: absolute;
+	margin: 3vh;
+	left: 0;
+	bottom: 0;
+	box-sizing: border-box;
+	height: calc(70% - 9vh);
+	right: 48px;
+
+	overflow-y: scroll;
+
+	z-index: 0;
+	
+	border: 2px solid #80C0FF;
+	border-radius: 0.4em;
+
+	background-color: rgba(64, 128, 196, 0.6);
+}
+/* Nicer UI for Webkit browser */
+div#schedule-frame::-webkit-scrollbar {
+	display: none;
+}
+
+/* div#schedule-frame > */
+div.schedule-room {
+    flex-grow: 1;
+    flex-shrink: 0;
+	flex-basis: 240px;
+	
+	position: relative;
+	
+	height: 60px;
+	margin: 0.5px;
+
+	color: #F8F8F8;
+	font-family: '游ゴシック', 'ヒラギノ角ゴ Pro W6', 'メイリオ', 'ＭＳ Ｐゴシック';
+
+	border-right: 2px solid rgba(0, 0, 0, 0.3);
+	border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+/* div.schedule-room > */
+div.schedule-current {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 59px;
+	bottom: 0;
+
+	background-color: rgba(64, 128, 196, 0.6);
+}
+
+/* div.schedule-current > */
+/* | div.schedule-next > */
+div.schedule-status {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+div.schedule-status.schedule-status-ok {
+	background-image: url("data:image/svg+xml,<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?><svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"32\" fill=\"none\" stroke=\"%2380FF80\" stroke-width=\"10\" stroke-opacity=\"0.5\"></circle></svg>");
+}
+div.schedule-status.schedule-status-ng {
+	background-image: url("data:image/svg+xml,<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?> <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"> <path d=\"M15,15L85,85M15,85L85,15\" fill=\"none\" stroke=\"%23FF8080\" stroke-width=\"12\" stroke-opacity=\"0.5\"></path> </svg>");
+}
+div.schedule-status.schedule-status-caution {
+	background-image: url("data:image/svg+xml,<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?> <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"> <path d=\"M50,20L15,85L85,85Z\" fill=\"none\" stroke=\"%23C0FF20\" stroke-width=\"12\" stroke-opacity=\"0.4\"></path> </svg>");
+}
+
+/* div.schedule-current > */
+div.schedule-progress {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 20%;
+
+	background-color: rgba(96, 154, 224, 0.8);
+}
+
+/* div.schedule-current > */
+div.schedule-room-name {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin: 2px 5px;
+
+	font-size: 12px;
+}
+
+/* div.schedule-current > */
+/* | div.schedule-next > */
+div.schedule-time {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin: 2px 5px;
+
+	font-size: 12px;
+}
+
+/* div.schedule-current > */
+/* | div.schedule-next > */
+div.schedule-title {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+
+	height: 1.5em;
+	line-height: 1.5em;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	text-align: center;
+}
+
+/* div.schedule-room > */
+div.schedule-next {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 58px;
+
+	background-color: rgba(64, 128, 196, 0.6);
+}
+
+div.schedule-next > div.schedule-title {
+	font-size: 12px;
+}
+div.schedule-next > div.schedule-time {
+	font-size: 10px;
+}
+
+/* div#scedule-frame > */
+div.schedule-no-room {
+	flex-grow: 1;
+    flex-shrink: 1;
+	flex-basis: 100%;
+	
+	position: relative;
+	
+	height: 60px;
+	margin: 0.5px;
+
+	text-align: center;
+
+	color: #F8F8F8;
+	font-size: 12px;
+	font-family: Verdana, Arial, sans-serif, '游ゴシック', 'ヒラギノ角ゴ Pro W6', 'メイリオ', 'ＭＳ Ｐゴシック';
+
+	border-right: 2px solid rgba(0, 0, 0, 0.3);
+	border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+
+	background-color: rgba(64, 128, 196, 0.6);	
+}
+div.schedule-no-room:hover > div.schedule-current,
+div.schedule-no-room:hover > div.schedule-next {
+	background-color: rgba(128, 196, 224, 0.6);	
+}
+div.schedule-no-room:hover {
+	background-color: rgba(128, 196, 224, 0.6);	
+}

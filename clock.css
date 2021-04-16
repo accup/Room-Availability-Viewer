@@ -1,0 +1,260 @@
+@charset "UTF-8";
+
+svg#clock-frame {
+	display: block;
+	position: absolute;
+	margin: 3vh;
+	left: 0;
+	top: 0;
+	box-sizing: border-box;
+	width: calc(100% - 6vh);
+	height: 30%;
+
+	border: 2px solid #80C0FF;
+	border-radius: 0.4em;
+
+	background-color: rgba(64, 128, 196, 0.6);
+}
+
+svg#clock-frame > .clock-slash {
+	stroke: #80C0FF;
+	stroke-linecap: round;
+	fill: none;
+}
+
+svg#clock-frame > .clock-colon {
+	stroke: none;
+	stroke-linecap: round;
+	fill: none;
+}
+svg#clock-frame > .clock-colon.clock-colon-on {
+	stroke: #80C0FF;
+}
+
+#clock-year-1 {
+	stroke-dashoffset: 1000;
+	stroke-width: 2;
+	transition: stroke-dashoffset 0.5s 	ease-out;
+}
+#clock-year-2 {
+	stroke-dashoffset: 1000;
+	stroke-width: 2;
+	transition: stroke-dashoffset 1.0s 	ease-out;
+}
+#clock-year-3 {
+	stroke-dashoffset: 1000;
+	stroke-width: 2;
+	transition: stroke-dashoffset 1.5s 	ease-out;
+}
+#clock-year-4 {
+	stroke-dashoffset: 1000;
+	stroke-width: 2;
+	transition: stroke-dashoffset 2.0s 	ease-out;
+}
+#clock-month-1 {
+	stroke-dashoffset: 1000;
+	stroke-width: 2;
+	transition: stroke-dashoffset 2.5s 	ease-out;
+}
+#clock-month-2 {
+	stroke-dashoffset: 1000;
+	stroke-width: 2;
+	transition: stroke-dashoffset 3.0s 	ease-out;
+}
+#clock-date-1 {
+	stroke-dashoffset: 1000;
+	stroke-width: 2;
+	transition: stroke-dashoffset 3.5s 	ease-out;
+}
+#clock-date-2 {
+	stroke-dashoffset: 1000;
+	stroke-width: 2;
+	transition: stroke-dashoffset 4.0s 	ease-out;
+}
+#clock-day-1 {
+	stroke-dashoffset: 1600;
+	stroke-width: 2;
+	transition: stroke-dashoffset 4.5s ease-out;
+}
+#clock-day-2 {
+	stroke-dashoffset: 1600;
+	stroke-width: 2;
+	transition: stroke-dashoffset 5.0s ease-out;
+}
+#clock-day-3 {
+	stroke-dashoffset: 1600;
+	stroke-width: 2;
+	transition: stroke-dashoffset 5.5s ease-out;
+}
+#clock-hour-1, #clock-hour-2,
+#clock-minute-1, #clock-minute-2,
+#clock-second-1, #clock-second-2 {
+	stroke-dashoffset: 0;
+	transition: stroke-dashoffset .4s ease-out;
+}
+
+svg#clock-frame > .clock-number {
+	stroke: white;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-dasharray:	/* interval 80 */
+		/*0*/ 60,
+				 40,
+		/*1*/       20,
+				 50,
+		/*2*/       20,10,30,
+				 20,
+		/*3*/       40,10,10,10,
+		/*4*/ 10,10,20,20,10,10,
+		/*5*/ 20,10,20,10,10,10,
+		/*6*/ 20,10,40,
+				 20,
+		/*7*/       30,40,
+		/*8*/ 70,10,
+		/*9*/ 50,10,10,10;
+
+	fill: none;
+}
+
+svg#clock-frame > .clock-number[data-number="0"] {
+	stroke-dashoffset: 0;
+}
+svg#clock-frame > .clock-number[data-number="1"] {
+	stroke-dashoffset: 80;
+}
+svg#clock-frame > .clock-number[data-number="2"] {
+	stroke-dashoffset: 160;
+}
+svg#clock-frame > .clock-number[data-number="3"] {
+	stroke-dashoffset: 240;
+}
+svg#clock-frame > .clock-number[data-number="4"] {
+	stroke-dashoffset: 320;
+}
+svg#clock-frame > .clock-number[data-number="5"] {
+	stroke-dashoffset: 400; /*240*/
+}
+svg#clock-frame > .clock-number[data-number="6"] {
+	stroke-dashoffset: 480; /*190*/
+}
+svg#clock-frame > .clock-number[data-number="7"] {
+	stroke-dashoffset: 560;
+}
+svg#clock-frame > .clock-number[data-number="8"] {
+	stroke-dashoffset: 640;
+}
+svg#clock-frame > .clock-number[data-number="9"] {
+	stroke-dashoffset: 720;
+}
+
+
+svg#clock-frame > .clock-alphabet {
+	stroke: white;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-dasharray:	/* interval 165 */
+		/*A*/ 40,10,20,
+				125,
+		/*a*/       25,	5,10,85,10,
+		/*d*/    20,50,
+				125,
+		/*e*/        5, 5,30,85,
+				 30, 
+		/*F*/ 		30,20,95,
+		/*h*/ 10,20,10,10,20,
+				135,
+		/*i*/       10,10, 5,25, 0, 5,10,60,
+		/*M*/ 40,10,10,25,10,
+				100,
+		/*n*/       10,10,20,
+				125,
+		/*o*/       40,95,
+		/*r*/  0,50,20,95,
+		/*S*/ 20,10,20,10,10,
+				105,
+		/*T*/       10,65,20,
+				100,
+		/*t*/        5,15,10,20,15,
+				 90,
+		/*u*/       30,105,
+		/*W*/ 10,10,40,35,10,60;
+	fill: none;
+}
+
+svg#clock-frame > .clock-alphabet--stroke-dasharray-keep {
+	stroke-dasharray:	/* interval 170 */
+	/*		0					85		20		   125		10   	   155	  10 |170*/
+		/*A*/ 40,10,20,			15,  0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*a*/  0,30,25,	5,10,	15,  0, 20, 0,		20,  0,10, 0,		20, 10, 5,
+		/*d*/  0,20,50,			15,	 0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*e*/  0,30, 5, 5,30,	15,	 0, 20, 0,		20,	 0,10, 0,		20, 10, 5,
+		/*F*/ 20,30,20,			15,  0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*h*/ 10,20,10,10,20,	15,	 0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*i*/  0,40,10,10,5,5,0,15,  0,  5, 0, 5,10,20,  0,10, 0,		20,  0,15,
+		/*M*/ 40,10,10,10, 0,	15, 10, 10, 0,		20,  0,10, 0,		20,  0,15,
+		/*n*/  0,30,10,10,20,	15,  0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*o*/  0,30,40,			15,  0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*r*/  0,50,20,			15,  0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*S*/ 20,10,20,10,10,	15,  0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*T*/  0,10,10,50, 0,	15, 20,				20,  0,10, 0,		20,  0,15,
+		/*t*/  0,40, 5,15,10,	15,  0,  5,15,		20,  0,10, 0,		20,  0,15,
+		/*u*/  0,30,30,10, 0,	15,  0, 20, 0,		20,  0,10, 0,		20,  0,15,
+		/*W*/ 10,10,40,10, 0,	15,  0, 10,10,		20,  0,10, 0,		20,  0,15;
+}
+
+svg#clock-frame > .clock-alphabet[data-alphabet="A"] {
+	stroke-dashoffset: 0;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="a"] {
+	stroke-dashoffset: 165;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="d"] {
+	stroke-dashoffset: 330;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="e"] {
+	stroke-dashoffset: 495;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="F"] {
+	stroke-dashoffset: 660;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="h"] {
+	stroke-dashoffset: 825;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="i"] {
+	stroke-dashoffset: 990;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="M"] {
+	stroke-dashoffset: 1155;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="n"] {
+	stroke-dashoffset: 1320;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="o"] {
+	stroke-dashoffset: 1485;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="r"] {
+	stroke-dashoffset: 1650;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="S"] {
+	stroke-dashoffset: 1815;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="T"] {
+	stroke-dashoffset: 1980;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="t"] {
+	stroke-dashoffset: 2145;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="u"] {
+	stroke-dashoffset: 2310;
+}
+svg#clock-frame > .clock-alphabet[data-alphabet="W"] {
+	stroke-dashoffset: 2475;
+}
+
+/* svg#clock-frame > */
+text#clock-holiday-name {
+	fill: #F8F8F8;
+	stroke: none;
+
+	font-family: '游ゴシック', 'ヒラギノ角ゴ Pro W6', 'メイリオ', 'ＭＳ Ｐゴシック';
+}
