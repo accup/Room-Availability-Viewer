@@ -33,7 +33,7 @@ div#schedule-frame::-webkit-scrollbar {
 /* div#schedule-frame > */
 div.schedule-room {
     flex-grow: 1;
-    flex-shrink: 0;
+    flex-shrink: 1;
 	flex-basis: 240px;
 	
 	position: relative;
