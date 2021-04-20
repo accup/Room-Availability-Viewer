@@ -271,9 +271,10 @@ class ScheduleController
 			status_cl.add('schedule-status-ng');
 		case StatusType.closed:
 			let nx_begin = (null === nx) ? st.end : nx.begin;
+			console.log(DateEx.h(st.end), DateEx.m(st.end), DateEx.s(st.end), DateEx.h(nx_begin), DateEx.m(nx_begin), DateEx.s(nx_begin));
 
 			// カレントステータスの設定
-			this.DOM.sc_time.textContent = `${NumberEx.toZeroPadding(DateEx.h(st.begin), 2)}:${NumberEx.toZeroPadding(DateEx.m(st.begin), 2)}　~　${NumberEx.toZeroPadding(DateEx.h(nx_begin), 2)}:${NumberEx.toZeroPadding(DateEx.m(nx_begin), 2)}`;
+			this.DOM.sc_time.textContent = `${NumberEx.toZeroPadding(DateEx.h(st.begin), 2)}:${NumberEx.toZeroPadding(DateEx.m(st.begin), 2)}　~　${NumberEx.toZeroPadding(DateEx.h(st.end), 2)}:${NumberEx.toZeroPadding(DateEx.m(st.end), 2)}`;
 
 			// ネクストステータスの設定
 			if (null === nx) {
@@ -300,7 +301,7 @@ class ScheduleController
 			// 30分以上空く -> ok
 			else {
 				this.DOM.sc_next_status.classList.add('schedule-status-ok');
-				this.DOM.sc_next_title.textContent = nx.state_text;
+				this.DOM.sc_next_title.textContent = "使用可";
 				this.DOM.sc_next_time.textContent = `~ ${NumberEx.toZeroPadding(DateEx.h(nx.begin), 2)}:${NumberEx.toZeroPadding(DateEx.m(nx.begin), 2)}`;
 			}
 			break;
