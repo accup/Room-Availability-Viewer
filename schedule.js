@@ -271,8 +271,6 @@ class ScheduleController
 			status_cl.add('schedule-status-ng');
 		case StatusType.closed:
 			let nx_begin = (null === nx) ? st.end : nx.begin;
-			console.log(DateEx.h(st.end), DateEx.m(st.end), DateEx.s(st.end), DateEx.h(nx_begin), DateEx.m(nx_begin), DateEx.s(nx_begin));
-
 			// カレントステータスの設定
 			this.DOM.sc_time.textContent = `${NumberEx.toZeroPadding(DateEx.h(st.begin), 2)}:${NumberEx.toZeroPadding(DateEx.m(st.begin), 2)}　~　${NumberEx.toZeroPadding(DateEx.h(st.end), 2)}:${NumberEx.toZeroPadding(DateEx.m(st.end), 2)}`;
 
@@ -341,7 +339,7 @@ class ScheduleController
 			switch (this.currentStatus.state) {
 			case StatusType.used:
 				{
-					let span = nextWorkTime - this.currentStatus.begin;
+					let span = this.currentStatus.end - this.currentStatus.begin;
 					if (0 !== span) {
 						let ratio = (second - this.currentStatus.begin) * 100 / span;
 						this.DOM.sc_progress.style.width = `${ratio}%`;
